@@ -10,7 +10,15 @@
 <br>
 
 # Concepts of MVC and Laravel 8
-
+## Create a new Laravel Project
+```
+composer create-project laravel/laravel mylovelyproject
+```
+Next time just hit the command below and it will create a new Laravel project.
+    
+```
+laravel new mylovelyproject2
+```
 ## Controller
 🍔Controller is a mediator between the view and the model.
 To create a controller, we need to create a class that extends the base controller class or use command
