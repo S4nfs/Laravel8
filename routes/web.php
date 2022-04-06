@@ -18,6 +18,8 @@ use App\Http\Controllers\OnetoOne;
 use App\Http\Controllers\RouteModelBinding;
 use App\Mail\SampleMail;
 
+use function PHPUnit\Framework\fileExists;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +33,23 @@ use App\Mail\SampleMail;
 
 //3 methods to route:
 Route::get('/', function () {                                       //[1]using function
-    return view('welcome');
+    return view('posts');
 });
 Route::get('users/{customer}', [Usercontroller::class, 'show']);    //[2]from controller [must import above]
 // Route::view("url", "file");                                      //[3]from view
+
+//Wildcards-------------------------------------------------------------------------------------------------------
+Route::get('/posts/{post}', function ($slug) {
+    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    $p = file_get_contents($path);
+    return view('post', ['data' => $p]);
+});
+
+
 
 //---------------------------------------------------------------------------------------------------------------
 Route::view('about', 'about');  //with header component
@@ -80,7 +95,7 @@ Route::view('upload', 'upload');
 Route::post('uploadFile', [UploadController::class, 'uploadER']);
 
 //Language--------------------------------------------------------------------------------------------------------
-Route::get('/lang/{lang}', function ($language){
+Route::get('/lang/{lang}', function ($language) {
     App::setlocale($language);
     return view('lang');
 });
@@ -94,7 +109,7 @@ Route::post('/edit', [Crud::class, 'updateData']);
 Route::get('/delete{id}', [Crud::class, 'deleteUser']); //Delete
 
 //QUERY BUILDER-----------------------------------------------------------------------------------------------------
-Route::get('myquerybuilder',[QueryBuilder::class, 'operation']);
+Route::get('myquerybuilder', [QueryBuilder::class, 'operation']);
 
 //Accessors & Mutators----------------------------------------------------------------------------------------------
 Route::get('accessors', [LearnAccessorsMutators::class, 'accessorss']);
@@ -109,7 +124,7 @@ Route::get('rbm/{mykey}', [RouteModelBinding::class, 'rbm']); //fetch using uniq
 Route::get('rbm/{mykey:devicename}', [RouteModelBinding::class, 'rbm']);  //fetch using name
 
 //Mail--------------------------------------------------------------------------------------------------------------
-ROute::get('/mail', function(){
+ROute::get('/mail', function () {
     return new SampleMail();
 });
 
