@@ -38,18 +38,19 @@ Route::get('/', function () {                                       //[1]using f
 Route::get('users/{customer}', [Usercontroller::class, 'show']);    //[2]from controller [must import above]
 // Route::view("url", "file");                                      //[3]from view
 
-//Wildcards-------------------------------------------------------------------------------------------------------
-Route::get('/posts/{post}', function ($slug) {
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+//Wildcards, Cashing----------------------------------------------------------------------------------------------
+Route::get('/posts/{dato}', function ($dato) {
 
-    if (!file_exists($path)) {
+    if (!file_exists($path = __DIR__ . "/../resources/posts/{$dato}.html")) {
         abort(404);
     }
-    $p = file_get_contents($path);
+    ddd($dato);
+    $p = cache()->remember('posts/{dato}', 5 , function() use ($path){  //cache the content for 5sec
+        var_dump('file_get_contents');
+        return file_get_contents($path);
+    });
     return view('post', ['data' => $p]);
-});
-
-
+})->where('posts', '[A-z]+'); //wildcard constraints only accepting letters in wildcard
 
 //---------------------------------------------------------------------------------------------------------------
 Route::view('about', 'about');  //with header component

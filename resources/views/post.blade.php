@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="css/posts.css">
+    <link rel="stylesheet" href="{{asset('css/posts.css')}}">
 </head>
 <body>
     <article>
-             <?php
-             $data;
-             ?>
+{!!$data!!}
     </article>
 
 </body>
