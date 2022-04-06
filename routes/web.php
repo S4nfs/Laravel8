@@ -17,6 +17,7 @@ use App\Http\Controllers\LearnAccessorsMutators;
 use App\Http\Controllers\OnetoOne;
 use App\Http\Controllers\RouteModelBinding;
 use App\Mail\SampleMail;
+use App\Models\FSclass;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -38,19 +39,24 @@ Route::get('/', function () {                                       //[1]using f
 Route::get('users/{customer}', [Usercontroller::class, 'show']);    //[2]from controller [must import above]
 // Route::view("url", "file");                                      //[3]from view
 
-//Wildcards, Cashing----------------------------------------------------------------------------------------------
+//Wildcards, Caching----------------------------------------------------------------------------------------------
 Route::get('/posts/{dato}', function ($dato) {
 
     if (!file_exists($path = __DIR__ . "/../resources/posts/{$dato}.html")) {
         abort(404);
     }
-    ddd($dato);
     $p = cache()->remember('posts/{dato}', 5 , function() use ($path){  //cache the content for 5sec
         var_dump('file_get_contents');
         return file_get_contents($path);
     });
     return view('post', ['data' => $p]);
 })->where('posts', '[A-z]+'); //wildcard constraints only accepting letters in wildcard
+
+//OR using models and file system class to make code easy to read
+// Route::get('/posts/{dato}', function ($dato) {
+//     $p = FSclass::find($dato);
+//     return view('post', ['data' => $p]);
+// })->where('post', '[A-z]+');
 
 //---------------------------------------------------------------------------------------------------------------
 Route::view('about', 'about');  //with header component
