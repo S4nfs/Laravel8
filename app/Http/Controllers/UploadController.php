@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class UploadController extends Controller
 {
     function uploadER(Request $req){
-return $req->file('doc')->store('img');
+return $req->doc->store('img');
     }
 }
