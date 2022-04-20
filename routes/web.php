@@ -16,6 +16,7 @@ use League\CommonMark\Node\Query;
 use App\Http\Controllers\LearnAccessorsMutators;
 use App\Http\Controllers\OnetoOne;
 use App\Http\Controllers\RouteModelBinding;
+use App\Http\Controllers\TodoController;
 use App\Mail\SampleMail;
 use App\Models\FSclass;
 
@@ -110,7 +111,7 @@ Route::get('/lang/{lang}', function ($language) {
 //CRUD-------------------------------------------------------------------------------------------------------------
 Route::view('login', 'submit'); //form view
 Route::post('add', [Crud::class, 'registerData']); //Create
-Route::get('myuser', [Crud::class, 'getUser']); // Read
+Route::get('myuser', [Crud::class, 'getUser']); // Read with pagination
 Route::get('/edit{id}', [Crud::class, 'showWhatToUpdate']); //Update
 Route::post('/edit', [Crud::class, 'updateData']);
 Route::get('/delete{id}', [Crud::class, 'deleteUser']); //Delete
@@ -122,7 +123,7 @@ Route::get('myquerybuilder', [QueryBuilder::class, 'operation']);
 Route::get('accessors', [LearnAccessorsMutators::class, 'accessorss']);
 Route::get('mutators', [LearnAccessorsMutators::class, 'mutatorss']);
 
-//Relationship with tables members,comanies,devices-----------------------------------------------------------------
+//Relationship with tables members,companies,devices-----------------------------------------------------------------
 Route::get('/o', [OnetoOne::class, 'onetoone']);    //OnetoOne
 Route::get('/om', [OnetoOne::class, 'onetomany']);
 
@@ -137,5 +138,11 @@ ROute::get('/mail', function () {
 
 //APIs---------------------------------------------------------------------------------------------------------------
 
-//Connect Multiple Databse-----------------------------------------------------------------------------------------------------
+//Connect Multiple Databse-------------------------------------------------------------------------------------------
 Route::get('/db2', [Clonedatabse::class, 'list']);  //controller OR model
+
+
+Route::get('/todos', [TodoController::class, 'index']);
+Route::get('/todos/create', [TodoController::class, 'create']);
+Route::post('/todos/create', [TodoController::class, 'store']);
+Route::get('/todos/edit', [TodoController::class, 'edit']);
