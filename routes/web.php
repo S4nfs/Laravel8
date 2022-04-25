@@ -146,4 +146,4 @@ Route::get('/todos', [TodoController::class, 'index']);
 Route::get('/todos/create', [TodoController::class, 'create']);
 Route::post('/todos/create', [TodoController::class, 'store']);
 Route::get('/todos/{id}/edit', [TodoController::class, 'edit']); //dynamic routing e.g id
-Route::patch('/todos/{id}/update', [TodoController::class, 'update']); //dynamic routing e.g id
+Route::patch('/todos/{id}/update', [TodoController::class, 'update']); //patch (with the previous TodoCreateRequest validation)
