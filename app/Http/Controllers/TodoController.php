@@ -47,8 +47,9 @@ class TodoController extends Controller
     }
 
 
-    function update(Todo $id)                         
+    function update(Todo $id, TodoCreateRequest $req)         //here we are passing both model and request(TodoCreateRequest) to keep code less
     {
-        return view('todos/edit', compact('id'));   
+        $id->update(['title'=> $req->title]);
+        return redirect()->back()->with('message', "You updated something");
     }
 }
