@@ -4,8 +4,9 @@
         <div class="text-center py-10 ">
         <h1 class="text-4xl">Update your To-Do List</h1>
         <x-Alert />
-        <form action="/todos/update" method="post" class="py-5">
+        <form action="{{'/todos/'.$id->id.'/update'}}" method="post" class="py-5">
             @csrf
+            @method('patch')
             <input type="text" name="title" value="{{$id->title}}" class="py-3 px-2 border rounded">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-10 ml-5 rounded-full"
                 type="submit">Update</button>
