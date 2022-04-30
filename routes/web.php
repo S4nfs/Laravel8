@@ -149,3 +149,4 @@ Route::get('/todos/{id}/edit', [TodoController::class, 'edit']); //dynamic routi
 Route::patch('/todos/{id}/update', [TodoController::class, 'update']); //patch (with the previous TodoCreateRequest validation)
 Route::put('/todos/{id}/complete', [TodoController::class, 'complete']);
 Route::delete('/todos/{id}/incomplete', [TodoController::class, 'incomplete']);
+Route::delete('/todos/{id}/delete', [TodoController::class, 'delete']);
