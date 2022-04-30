@@ -9,7 +9,7 @@
 <br>
 <br>
 
-# Concepts of MVC and Laravel 8
+# Concepts of MVC Architecture and Laravel 8
 
 ## Create a new Laravel Project (First-Time)
 
