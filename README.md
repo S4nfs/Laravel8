@@ -11,7 +11,7 @@
 
 # Concepts of MVC and Laravel 8
 
-## Create a new Laravel Project
+## Create a new Laravel Project (First-Time)
 
 ```
 composer create-project laravel/laravel mylovelyproject
