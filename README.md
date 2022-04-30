@@ -43,7 +43,9 @@ You can access blade views file out side the view folder but you need to do some
 ## Component
 
 🍔Component is a class that can be used in multiple places.
+```
 #php artisan make:component Mycustomcomponentname
+```
 generate two files in resources/views/components folder named Mycustomcomponentname.blade.php and in app/views/components folder named Mycustomcomponentname.blade.php
 
 ## Model
